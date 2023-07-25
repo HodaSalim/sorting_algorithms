@@ -5,7 +5,7 @@
  * Description: performs a selection sort on array of int
  * retun: void no return value
  * algo: modifies passed array to decenting order
- */
+*/
 
 void selection_sort(int *array, size_t size)
 {

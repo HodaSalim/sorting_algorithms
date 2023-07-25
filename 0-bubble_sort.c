@@ -1,12 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "sort.h"
-/*
+
+/**
  * bubble_sort - Performs bubble sort on arrays of integers
- * Description: Implement the bubble sort on an array of integrs
- * @parameter: an aray of intergers and size
+ *
+ * @array : an aray of intergers and size
+ * @size: an aray of intergers and size
+ *
  * Return: void
- */
+*/
 
 void bubble_sort(int *array, size_t size)
 {
