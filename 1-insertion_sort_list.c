@@ -1,74 +1,46 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include "sort.h"
-
 /**
- * swap_nodes - Performs bubble sort on arrays of integers
- *
- * @list : an aray of intergers and size
- * @node_a: an aray of intergers and size
- * @node_b: an aray of intergers and size
- *
- * Return: void
-*/
-void swap_nodes(listint_t **list, listint_t *node_a, listint_t *node_b)
-{
-	if (node_a == NULL || node_b == NULL || node_a == node_b)
-	{
-		return;
-	}
-	if (node_a->prev != NULL)
-	{
-		node_a->prev->next = node_b;
-	} else
-	{
-		*list = node_b;
-	}
-
-	if (node_b->next != NULL)
-	{
-		node_b->next->prev = node_a;
-	}
-
-	listint_t *temp = node_b->next;
-
-	node_b->next = node_a;
-	node_a->prev = node_b;
-	node_a->next = temp;
-
-	if (temp != NULL)
-	{
-		temp->prev = node_a;
-	}
-}
-
-/**
- * insertion_sort_list - Performs bubble sort on arrays of integers
- *
- * @list : a linked list of intergers
- *
- * Return: void
-*/
+ * insertion_sort_list - function that sorts a doubly linked list
+ * of integers in ascending order using the Insertion sort algorithm
+ * @list: Dobule linked list to sort
+ */
 void insertion_sort_list(listint_t **list)
 {
-	if (*list == NULL || (*list)->next == NULL)
-	{
+	listint_t *node;
+
+	if (list == NULL || (*list)->next == NULL)
 		return;
-	}
-
-	listint_t *current = (*list)->next;
-
-	while (current != NULL)
+	node = (*list)->next;
+	while (node)
 	{
-		listint_t *prev = current->prev;
-
-		while (prev != NULL && prev->n > current->n)
+		while ((node->prev) && (node->prev->n > node->n))
 		{
-			swap_nodes(list, prev, current);
-			prev = current->prev;
+			node = swap_node(node, list);
 			print_list(*list);
 		}
-
-		current = current->next;
+		node = node->next;
 	}
+}
+/**
+ *swap_node - swap a node for his previous one
+ *@node: node
+ *@list: node list
+ *Return: return a pointer to a node which was enter it
+ */
+listint_t *swap_node(listint_t *node, listint_t **list)
+{
+	listint_t *back = node->prev, *current = node;
+	/*NULL, 19, 48, 9, 71, 13, NULL*/
+
+	back->next = current->next;
+	if (current->next)
+		current->next->prev = back;
+	current->next = back;
+	current->prev = back->prev;
+	back->prev = current;
+	if (current->prev)
+		current->prev->next = current;
+	else
+		*list = current;
+	return (current);
 }
