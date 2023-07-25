@@ -1,10 +1,13 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "sort.h"
 /*
- * bubble_sort: performs bubble sort on arrays of integers
- * Return: the original array, the array after each
- * sorting phase and the final sorted array
+ * bubble_sort - Performs bubble sort on arrays of integers
+ * Description: Implement the bubble sort on an array of integrs
+ * @parameter: an aray of intergers and size
+ * Return: void
  */
+
 void bubble_sort(int *array, size_t size)
 {
 	unsigned long i, j;
